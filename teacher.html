@@ -103,33 +103,96 @@
     }
 
     /* ==============================
-       メッセージ（吹き出しカード）
-    ============================== */
-    .message-section{ padding:0 0 1.5rem; }
-    .message-bubble{
-      position:relative; max-width:1000px; margin:0 auto;
-      padding:clamp(1rem,2.8vw,1.5rem) clamp(1rem,3vw,1.75rem);
-      background:#fff; border:1px solid #e4e4e4; border-radius:1rem;
-      box-shadow:0 4px 14px rgba(0,0,0,.08); color:#333;
-    }
-    .message-bubble::before{
-      content:"“"; position:absolute; top:.2rem; left:.8rem;
-      font-size:3rem; line-height:1; color:rgba(205,162,9,.18); font-family:Georgia,"Times New Roman",serif;
-      pointer-events:none;
-    }
-    .message-bubble::after{
-      content:""; position:absolute; bottom:-14px; left:2.5rem; width:26px; height:26px;
-      background:linear-gradient(135deg, transparent 50%, #fff 0) no-repeat;
-      transform:rotate(45deg); border-right:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;
-      box-shadow:4px 4px 10px rgba(0,0,0,.05);
-    }
-    .message-bubble p{ margin:0; font-size:1.05rem; }
+   メッセージ（吹き出しカード）
+============================== */
+
+:root{
+  /* 余白スケール（基準はPC） */
+  --padY: clamp(1rem, 4vw, 1.5rem);
+  --padX: clamp(1rem, 5vw, 1.75rem);
+  --radius: 1rem;
+  --shadow: 0 4px 14px rgba(0,0,0,.08);
+  --line: #e4e4e4;
+  --text: #333;
+  --bg: #fff;
+  --accent-quote: rgba(205,162,9,.18);
+}
+
+.message-section{
+  padding: 0 0 1.5rem;
+}
+
+.message-bubble{
+  position: relative;
+  max-width: min(90vw, 1000px);
+  margin: 0 auto;
+  padding: var(--padY) var(--padX);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  line-height: 1.8;
+  /* 文字まわりの強化（スマホで効く） */
+  overflow-wrap: anywhere;   /* 長いURL/英単語も自然に折返し */
+  word-break: normal;
+  hyphens: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.message-bubble::before{
+  content:"“";
+  position:absolute;
+  top:.2rem;
+  left:.8rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height:1;
+  color: var(--accent-quote);
+  font-family: Georgia,"Times New Roman",serif;
+  pointer-events:none;
+}
+
+.message-bubble::after{
+  content:"";
+  position:absolute;
+  bottom:-14px;
+  left: clamp(1.5rem, 8vw, 2.5rem);
+  width:26px; height:26px;
+  background: linear-gradient(135deg, transparent 50%, var(--bg) 0) no-repeat;
+  transform: rotate(45deg);
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  box-shadow: 4px 4px 10px rgba(0,0,0,.05);
+}
+
+.message-bubble p{
+  margin:0;
+  font-size: clamp(.95rem, 3.2vw, 1.05rem);
+}
+
+/* ==============================
+   レスポンシブ（メディアクエリ）
+============================== */
+
+/* タブレット以下で少しタイトに */
+@media (max-width: 900px){
+  .message-section{
+    width: 80vw;
+    margin: 0 auto;
+  padding: 0 0 1.5rem;
+}
+
+}
+
+
+
+
 
     /* ==============================
        教員写真
     ============================== */
     .teacher-about-flex{ display:flex; justify-content:center; }
-    .teacher-image{ width:min(30vw,380px); height:auto; display:block; }
+    .teacher-image{ width:min(50vw,500px); height:auto; display:block; }
 
     /* ==============================
        フッター
@@ -251,4 +314,3 @@
   </footer>
 </body>
 </html>
-
