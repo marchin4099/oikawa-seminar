@@ -1,199 +1,246 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="早稲田大学教育学部 社会科公共市民学専修・及川ゼミの公式サイト。ゼミ概要、教員紹介、ゼミ生紹介、活動・お知らせなどを掲載。" />
   <title>及川ゼミ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+
+  <!-- フォント（表示をブロックしない） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
-    /* ========== Base ========== */
-    html,body{ margin:0; }
-    body{ font-family:'Zen Maru Gothic',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif; color:#222; background:#fafafa; }
+    /* ==============================
+       Base / Tokens
+    ============================== */
+    :root{
+      /* Colors */
+      --brand-deep:#003366; /* ヘッダー */
+      --accent:#CDA209;     /* 見出し帯・強調 */
+      --text:#333;
+      --muted:#666;
+      --card-bg:#fff;
+      --line:#e6e6e6;
 
-     .teacheroverlay-box {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒塗り */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
+      /* Effects */
+      --radius:16px;
+      --shadow:0 4px 10px rgba(0,0,0,.08);
 
-.teacheroverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
+      /* Layout */
+      --wrap:max(1000px,70%);
+      --card-max:1000px;
+      --section-pad:3rem;
 
-.teacher-top{
-  position: relative;
-  width: 100%;
-  height: 360px; /* 画像と同じ高さに固定 */
-  overflow: hidden;
-}
+      /* 見出し帯 */
+      --bar-color:#CDA209;
+      --bar-text:#fff;
+      --bar-max:1100px;
+      --bar-line-thin:2px;
 
-.letteroverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
+      /* メディア高さ */
+      --media-h-desktop:200px;
+      --media-h-mobile:220px;
+    }
 
-.studentoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
+    /* ダークモード調整（配色のみ上書き） */
+    @media (prefers-color-scheme: dark){
+      :root{
+        --card-bg:#1e1e1e;
+        --muted:#bbb;
+        --line:#333;
+        --shadow:0 2px 12px rgba(0,0,0,.55);
+      }
+      body{ color:#fffaf2; background:#141414; }
+      a{ color:#9bd3ff; }
+    }
 
-.activityoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
+    /* ==============================
+       Base
+    ============================== */
+    html,body{ margin:0; padding:0; }
+    body{
+      font-family:"Zen Maru Gothic",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:#fffaf2; /* ほんのりクリーム（サイト共通トーン） */
+      line-height:1.8;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
 
-.outlineoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
+    /* ==============================
+       Header / Nav
+    ============================== */
+    .site-header{
+      position:sticky; top:0; z-index:1000;
+      height:60px; background:var(--brand-deep);
+      display:flex; align-items:center;
+      padding:0 3%; box-sizing:border-box;
+      overflow-x:auto; -webkit-overflow-scrolling:touch;
+    }
+    .site-header::-webkit-scrollbar{ display:none; }
 
-}
+    .header-nav{
+      display:flex; flex-wrap:nowrap; gap:24px; white-space:nowrap;
+    }
+    .header-nav a{
+      color:#fff; text-decoration:none; font-size:16px; line-height:1.2; padding:.5rem 0;
+    }
+    .header-nav a:hover{ color:#00a2ff; }
 
-.questionoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
+    @media (max-width:768px){
+      .header-nav{ gap:16px; }
+      .header-nav a{ font-size:14px; }
+    }
 
-.contactoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.planoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-.site-header{
-  position:sticky; top:0; z-index:1000;
-  height:60px;
-  background:#003366;
-  display:flex;
-  align-items:center;
-  padding:0 3%;
-  box-sizing:border-box;
-  overflow-x:auto;                /* ← 横スクロールを許可 */
-  -webkit-overflow-scrolling:touch; /* ← iPhoneでスムーズに */
-}
-
-/* スクロールバー非表示（任意） */
-.site-header::-webkit-scrollbar {
-  display: none;
-}
-
-.header-nav{
-  display:flex;
-  flex-wrap:nowrap;              /* ← 折り返さない */
-  gap:24px;                      /* ← 間隔は好みで調整 */
-  white-space:nowrap;            /* ← 改行禁止で横並び固定 */
-  justify-content:flex-start;
-}
-
-.header-nav a{
-  color:#fff;
-  text-decoration:none;
-  font-size:16px;
-  line-height:1.2;
-  padding:0.5rem 0;              /* ← 指で押しやすく */
-}
-
-.header-nav a:hover{
-  color:#00a2ff;
-}
-
-/* ===== スマホ対応（768px以下） ===== */
-@media (max-width: 768px){
-  .header-nav{
-    gap:16px;                   /* スマホは少し詰める */
-  }
-  .header-nav a{
-    font-size:14px;
-  }
-}
-
-
-    /* ========== Hero ========== */
+    /* ==============================
+       Hero
+    ============================== */
     .top-wrapper{
-      position:relative; width:100%; height:37.5rem; overflow:hidden;
+      position:relative; width:100%; height:600px; overflow:hidden;
     }
     .top-image{
       width:100%; height:100%; object-fit:cover; display:block;
     }
     .overlay-box{
-      position:absolute; inset:0 auto 0 70%; /* 右30%帯 */
-      width:30%; height:100%;
-      background:rgba(0,0,0,.6);
+      position:absolute; inset:0 auto 0 70%;
+      width:30%; height:100%; background:rgba(0,0,0,.6);
       display:flex; align-items:center; justify-content:center; text-align:center;
     }
-    .top-logo{
-      position:absolute; top:10%; left:50%; transform:translateX(-50%);
-      width:40%; min-width:10rem; height:auto;
-    }
     .overlay-text{
-      color:#fff; font-weight:700; line-height:1.6; margin-top:5rem;
+      color:#fff; font-weight:700; line-height:1.6;
+      margin-top:5rem; padding:0 1rem;
     }
-    .overlay-text .line3{ font-size:3rem; }
+    .overlay-text .line3{ font-size:3rem; letter-spacing:.02em; }
     .overlay-text .line1,.overlay-text .line2{ font-size:1.5rem; }
 
-    /* ========== Theme section ========== */
-    .theme{
-      width:100%; max-width:1100px; margin:3rem auto 0; padding:0 1rem; text-align:center; box-sizing:border-box;
+    @media (max-width:900px){
+      .top-wrapper{ height:480px; }
     }
-    .theme .responsive-image{ display:block; margin:1rem auto 0; max-width:100%; height:auto; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.1); }
-
-    /* ========== Footer（共通） ========== */
-    .site-footer{ background:#333; color:#fff; text-align:center; padding:1rem; margin-top:2rem; }
-    .footer-sns img{ width:3rem; height:auto; margin:1rem; vertical-align:middle; }
-    .line-icon{ border-radius:50%; overflow:hidden; }
-    .footer-links{ display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-bottom:.5rem; }
-    .footer-links a{ color:#fff; text-decoration:none; white-space:nowrap; }
-    .footer-links a:hover{ text-decoration:underline; }
-    .footer-copy{ font-size:.9rem; color:#ccc; margin-top:.5rem; }
-
-    /* ========== Responsive ========== */
-    @media (max-width: 768px){
+    @media (max-width:768px){
       .top-wrapper{ height:360px; }
-      .overlay-box{
-        left:0; width:100%; /* スマホは帯を全幅に */
-      }
-      .overlay-text{ margin-top:8rem; }
-      .overlay-text .line3{ font-size:2rem; }
-      .overlay-text .line1,.overlay-text .line2{ font-size:1rem; }
-      .top-logo{ width:46%; }
+      .overlay-box{ left:0; width:100%; }
+      .overlay-text{ margin-top:4rem; }
+      .overlay-text .line3{ font-size:2.2rem; }
+      .overlay-text .line1,.overlay-text .line2{ font-size:1.2rem; }
     }
+
+    /* ==============================
+       Shared Card
+    ============================== */
+    .card{
+      max-width:var(--card-max);
+      margin:0 auto;
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:1.5rem;
+    }
+
+    /* ==============================
+       Welcome
+    ============================== */
+    .welcome{
+      background:linear-gradient(180deg,#fff 0%,#fffaf2 100%);
+      padding:var(--section-pad) 1.5rem;
+      text-align:center;
+      animation:welcome-fade .8s ease-out both;
+    }
+    .welcome-inner{ max-width:50em; margin:0 auto; }
+    .welcome-head h1{
+      font-size:clamp(1.6rem,4vw,2.1rem);
+      color:var(--accent);
+      margin:0 0 .6rem;
+    }
+    .welcome-lead{ margin:0 0 1.2rem; color:#444; font-size: 1.2rem;}
+
+    @keyframes welcome-fade{
+      from{ opacity:0; transform:translateY(6px); }
+      to{ opacity:1; transform:none; }
+    }
+
+    /* ==============================
+       見出し帯
+    ============================== */
+    .bar-title{
+      width:100%; max-width:var(--bar-max);
+      margin:1.5rem auto; padding:1rem 1.5rem;
+      background:var(--bar-color); color:var(--bar-text);
+      position:relative; box-sizing:border-box;
+      border-top:1px solid rgba(205,162,9,.8);
+      border-bottom:1px solid rgba(205,162,9,.8);
+    }
+    .bar-title::before,
+    .bar-title::after{
+      content:""; position:absolute; left:0; width:100%;
+      height:var(--bar-line-thin); background:#fff;
+    }
+    .bar-title::before{ top:0; }
+    .bar-title::after{ bottom:0; }
+    .bar-title__text{
+      color:#fff; margin:0; text-align:center;
+      font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700;
+    }
+    @media (max-width:1024px){
+      .bar-title{ width:auto; margin:1.5rem .5rem; border-radius:.4rem; }
+    }
+
+    /* ==============================
+       Theme Image Section
+    ============================== */
+    .theme{
+      width:100%; max-width:1100px;
+      margin:2rem auto 0; padding:0 1rem; box-sizing:border-box;
+    }
+    .responsive-image{
+      display:block; margin:1rem auto 0; max-width:100%; height:auto;
+      border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.1);
+    }
+
+    /* ==============================
+       Logo Explanation
+    ============================== */
+    .logo-section{ padding:var(--section-pad) 1rem; }
+    .logo-card{
+      display:flex; align-items:center; justify-content:center; gap:2rem;
+    }
+    .logo-card img{
+      width:40%; border-radius:12px; object-fit:cover;
+    }
+    .text-box{ width:60%; }
+    .text-box h2{
+      font-size:1.4rem; margin:.2rem 0 1rem; color:var(--accent);
+    }
+    .text-box p{
+      line-height:1.9; font-size:1rem; color:#444; margin:0;
+    }
+    @media (max-width:768px){
+      .logo-card{ flex-direction:column; text-align:center; }
+      .logo-card img, .text-box{ width:100%; }
+    }
+
+    /* ==============================
+       Footer
+    ============================== */
+    .site-footer{
+      background:#333; color:#fff; text-align:center;
+      padding:1rem; margin-top:2rem;
+    }
+    .footer-sns img{
+      width:3rem; height:auto; margin:1rem; vertical-align:middle;
+    }
+    .line-icon{ border-radius:50%; overflow:hidden; }
+    .footer-links{
+      display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-bottom:.5rem;
+    }
+    .footer-links a{
+      color:#fff; text-decoration:none; white-space:nowrap;
+    }
+    .footer-links a:hover{ text-decoration:underline; }
+    .footer-copy{ font-size:.9rem; color:#ccc; margin:.5rem 0 0; }
   </style>
 </head>
-
 <body>
 
   <!-- Header -->
@@ -211,21 +258,52 @@
 
   <!-- Hero -->
   <section class="top-wrapper" aria-label="トップビジュアル">
-    <img src="IMG_2030.jpeg" class="top-image" alt="トップ画像">
+    <img src="IMG_2030.jpeg" class="top-image" alt="及川ゼミのトップ画像（キャンパス風景など）" />
     <div class="overlay-box">
-      <img src="oikawa_logo_transparent.png" class="top-logo" alt="及川ゼミロゴ">
-      <div class="overlay-text">
-        <p class="line1">社会科</p>
-        <p class="line2">公共市民学専修</p><br>
+      <div class="overlay-text" aria-label="学部・専修・ゼミ名">
+        <p class="line1">早稲田大学教育学部</p>
+        <p class="line2">社会科公共市民学専修</p>
+        <br />
         <p class="line3">及川ゼミ</p>
       </div>
     </div>
   </section>
 
-  <!-- Theme section -->
-  <section class="theme">
-    <img src="風岡トップ.jpg" class="responsive-image" alt="ゼミ写真">
-  </section>
+  <main id="main">
+    <!-- Welcome -->
+    <section class="welcome" aria-label="ウェルカムセクション">
+      <div class="welcome-inner">
+        <header class="welcome-head">
+          <h1>ようこそ、及川ゼミのホームページへ！</h1>
+          <p class="welcome-lead">
+            経済学とデータ分析で、身近な現象や社会課題を読み解く「及川ゼミ」<br>
+            仮説の設定からデータ分析、論文執筆までを自ら行い、実証的に考える力を育てています<br>
+            このサイトでは、ゼミの概要や教員紹介、活動内容などを紹介しています！
+          </p>
+        </header>
+      </div>
+    </section>
+
+    <div class="bar-title">
+      <h2 class="bar-title__text">メッセージ</h2>
+    </div>
+
+    <!-- Theme image -->
+    <section class="theme" aria-label="ゼミ写真">
+      <img src="風岡トップ.jpg" class="responsive-image" alt="ゼミ活動の写真" />
+    </section>
+
+    <!-- Logo explanation -->
+    <section class="logo-section" aria-label="ロゴの説明">
+      <div class="card logo-card">
+        <img src="sample.jpg" alt="及川ゼミロゴのイメージ" />
+        <div class="text-box">
+          <h2>及川ゼミロゴマーク</h2>
+          <p>4人が手を取り合い、互いの多様性を認め合う姿を描き、その輪が及川先生の頭文字「O」をかたどっています</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="site-footer" role="contentinfo">
@@ -250,6 +328,6 @@
 
     <p class="footer-copy">Copyright © Oikawa Seminar Rights Reserved.</p>
   </footer>
-
 </body>
 </html>
+
