@@ -5,211 +5,290 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>お知らせ｜及川ゼミ</title>
 
+  <!-- フォント -->
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet" />
 
-  <!-- ページ内CSS（共通CSSがあるなら先に読み込み→このブロックで上書きでもOK） -->
   <style>
-    /* ===== ベース ===== */
-    html, body { margin: 0; }
-    body { font-family: "Zen Maru Gothic", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color:#333; }
-
-    :root{
-      /* 見出し帯 */
-      --bar-color:#CDA209; --bar-text:#fff; --bar-max:1100px;
-      /* カード/文字 */
-      --card-bg:#fff; --muted:#666; --shadow:0 2px 8px rgba(0,0,0,.1); --radius:12px;
+    /* ==============================
+       ベース設定
+    ============================== */
+    html, body {
+      margin: 0;
+      padding: 0;
     }
-    @media (prefers-color-scheme: dark){
-      :root{ --card-bg:#1f1f1f; --muted:#bbb; --shadow:0 2px 10px rgba(0,0,0,.5); }
-      body{ color:#eee; }
+    body {
+      font-family: "Zen Maru Gothic", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #333;
+      background: #fffaf2; /* ほんのりクリームで紙っぽく */
     }
 
-     .teacheroverlay-box {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒塗り */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
+    :root {
+      /* カラートークン */
+      --bar-color: #CDA209;
+      --bar-text: #fff;
+      --bar-max: 1100px;
+      --bar-line-thin: 2px;
 
-.teacheroverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
+      /* トーン/共通UI */
+      --card: #fffaf2;
+      --line: #e6e6e6;
+      --shadow: 0 6px 18px rgba(0,0,0,.06);
+      --radius: 14px;
+      --muted: #666;
+      --brand: #1f6feb;
+      --wrap: min(1000px, 92vw);
 
-.teacher-top{
-  position: relative;
-  width: 100%;
-  height: 360px; /* 画像と同じ高さに固定 */
-  overflow: hidden;
-}
-
-.letteroverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.studentoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.activityoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.outlineoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-
-}
-
-.questionoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.contactoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.planoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-    .site-header{
-  position:sticky; top:0; z-index:1000;
-  height:60px;
-  background:#003366;
-  display:flex;
-  align-items:center;
-  padding:0 3%;
-  box-sizing:border-box;
-  overflow-x:auto;                /* ← 横スクロールを許可 */
-  -webkit-overflow-scrolling:touch; /* ← iPhoneでスムーズに */
-}
-
-/* スクロールバー非表示（任意） */
-.site-header::-webkit-scrollbar {
-  display: none;
-}
-
-.header-nav{
-  display:flex;
-  flex-wrap:nowrap;              /* ← 折り返さない */
-  gap:24px;                      /* ← 間隔は好みで調整 */
-  white-space:nowrap;            /* ← 改行禁止で横並び固定 */
-  justify-content:flex-start;
-}
-
-.header-nav a{
-  color:#fff;
-  text-decoration:none;
-  font-size:16px;
-  line-height:1.2;
-  padding:0.5rem 0;              /* ← 指で押しやすく */
-}
-
-.header-nav a:hover{
-  color:#00a2ff;
-}
-
-/* ===== スマホ対応（768px以下） ===== */
-@media (max-width: 768px){
-  .header-nav{
-    gap:16px;                   /* スマホは少し詰める */
-  }
-  .header-nav a{
-    font-size:14px;
-  }
-}
-
-    /* ===== ヒーロー（トップ画像＋オーバーレイ） ===== */
-    .hero{ position:relative; width:100%; overflow:hidden; }
-    .hero img{ display:block; width:100%; height:auto; }
-    .hero__overlay{ position:absolute; inset:0; background:rgba(0,0,0,.35);
-      display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; padding:2rem; }
-    .hero__title{ margin:0; letter-spacing:.3em; font-size:clamp(1.6rem,4vw,2.2rem); }
-
-    /* ===== 見出し帯 ===== */
-    .bar-title{
-      width:100%; max-width:var(--bar-max); margin:1.5rem auto;
-      background:var(--bar-color); position:relative; padding:1rem 1.5rem; box-sizing:border-box;
-      border-top:1px solid rgba(205,162,9,.8); border-bottom:1px solid rgba(205,162,9,.8);
-    }
-    .bar-title::before,.bar-title::after{
-      content:""; position:absolute; left:0; width:100%; height:2px; background:#fff;
-    }
-    .bar-title::before{ top:0; } .bar-title::after{ bottom:0; }
-    .bar-title__text{ color:#fff; font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700; margin:0; text-align:center; }
-    @media (max-width:1024px){
-      .bar-title{ width:auto; margin:1.5rem .5rem; border-radius:.4rem; }
+      /* メディア高さ */
+      --media-h-desktop: 200px;
+      --media-h-mobile: 220px;
     }
 
-    /* ===== お知らせ一覧 ===== */
-    .announcement-page{ background:#fafafa; display:flex; justify-content:center; padding:2rem 1rem; box-sizing:border-box; }
-    .announcement-container{ max-width:800px; width:100%; }
-    .announcement-card{ padding:1.5rem 0; border-bottom:1px solid #ddd; }
-    .announcement-card:last-of-type{ border-bottom:none; }
-
-    .announcement-date{ color:#777; font-size:.9rem; margin:.1rem 0 .3rem; }
-    .announcement-title{ font-size:1.3rem; font-weight:600; margin:.2rem 0 .8rem; color:#222; }
-    .announcement-content{ font-size:1rem; line-height:1.7; margin:0 0 .8rem 0; }
-    .announcement-link{ color:#007acc; text-decoration:none; font-weight:500; }
-    .announcement-link:hover{ text-decoration:underline; }
-
-    @media (max-width:600px){
-      .announcement-page{ padding:1.5rem 1rem; }
-      .announcement-title{ font-size:1.1rem; }
-      .announcement-content{ font-size:.95rem; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --card-bg: #1f1f1f;
+        --muted: #bbb;
+        --shadow: 0 2px 10px rgba(0,0,0,.5);
+      }
+      body {
+        color: #fffaf2;
+      }
     }
 
-    /* ===== フッター ===== */
-    .site-footer{ background:#333; color:#fff; padding:1rem; text-align:center; }
-    .footer-sns img{ width:3rem; height:auto; margin:1rem; vertical-align:middle; }
-    .line-icon{ border-radius:50%; overflow:hidden; }
-    .footer-links{ display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-bottom:.5rem; }
-    .footer-links a{ color:#fff; text-decoration:none; white-space:nowrap; }
-    .footer-links a:hover{ text-decoration:underline; }
-    .footer-copy{ font-size:.9rem; color:#ccc; margin:.5rem 0 0; }
+    /* ==============================
+       オーバーレイ（上部画像共通）
+    ============================== */
+    .teacher-top {
+      position: relative;
+      width: 100%;
+      height: 360px;
+      overflow: hidden;
+    }
+
+    .teacheroverlay-box {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .teacheroverlay-text {
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ==============================
+       ヘッダー
+    ============================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 60px;
+      background: #003366;
+      display: flex;
+      align-items: center;
+      padding: 0 3%;
+      box-sizing: border-box;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* スクロールバー非表示 */
+    .site-header::-webkit-scrollbar {
+      display: none;
+    }
+
+    .header-nav {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 24px;
+      white-space: nowrap;
+      justify-content: flex-start;
+    }
+
+    .header-nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      line-height: 1.2;
+      padding: 0.5rem 0;
+    }
+
+    .header-nav a:hover {
+      color: #00a2ff;
+    }
+
+    @media (max-width: 768px) {
+      .header-nav { gap: 16px; }
+      .header-nav a { font-size: 14px; }
+    }
+
+    /* ==============================
+       見出し帯
+    ============================== */
+    .bar-title {
+      width: 100%;
+      max-width: var(--bar-max);
+      margin: 1.5rem auto;
+      background: var(--bar-color);
+      position: relative;
+      padding: 1rem 1.5rem;
+      box-sizing: border-box;
+      border-top: 1px solid rgba(205,162,9,.8);
+      border-bottom: 1px solid rgba(205,162,9,.8);
+    }
+
+    .bar-title::before,
+    .bar-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #fff;
+    }
+
+    .bar-title::before { top: 0; }
+    .bar-title::after  { bottom: 0; }
+
+    .bar-title__text {
+      color: #fff;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700;
+      margin: 0;
+      text-align: center;
+    }
+
+    @media (max-width: 1024px) {
+      .bar-title {
+        width: auto;
+        margin: 1.5rem .5rem;
+        border-radius: .4rem;
+      }
+    }
+
+    /* ==============================
+       お知らせ一覧
+    ============================== */
+    .announcement-page {
+      background: #fffaf2;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      box-sizing: border-box;
+    }
+
+    .announcement-container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .announcement-card {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .announcement-card:last-of-type {
+      border-bottom: none;
+    }
+
+    .announcement-date {
+      color: #777;
+      font-size: .9rem;
+      margin: .1rem 0 .3rem;
+    }
+
+    .announcement-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: .2rem 0 .8rem;
+      color: #222;
+    }
+
+    .announcement-content {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin: 0 0 .8rem 0;
+    }
+
+    .announcement-link {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .announcement-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .announcement-page { padding: 1.5rem 1rem; }
+      .announcement-title { font-size: 1.1rem; }
+      .announcement-content { font-size: .95rem; }
+    }
+
+    /* ==============================
+       フッター
+    ============================== */
+    .site-footer {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .footer-sns img {
+      width: 3rem;
+      height: auto;
+      margin: 1rem;
+      vertical-align: middle;
+    }
+
+    .line-icon {
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .8rem;
+      margin-bottom: .5rem;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-copy {
+      font-size: .9rem;
+      color: #ccc;
+      margin: .5rem 0 0;
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- ============================== -->
   <!-- ヘッダー -->
+  <!-- ============================== -->
   <header class="site-header" role="banner">
     <nav class="header-nav" aria-label="主要ナビゲーション">
       <a href="top.html">トップページ</a>
@@ -223,18 +302,26 @@
     </nav>
   </header>
 
-<section class="teacher-top" aria-label="ページ上部ビジュアル">
+  <!-- ============================== -->
+  <!-- トップビジュアル -->
+  <!-- ============================== -->
+  <section class="teacher-top" aria-label="ページ上部ビジュアル">
     <img src="IMG_2030.jpeg" class="top-image" alt="トップ画像">
     <div class="teacheroverlay-box">
       <div class="teacheroverlay-text"><h1>お　知　ら　せ</h1></div>
     </div>
   </section>
-  <!-- セクション見出し（任意） -->
+
+  <!-- ============================== -->
+  <!-- セクション見出し -->
+  <!-- ============================== -->
   <div class="bar-title">
     <h2 class="bar-title__text">最新のお知らせ</h2>
   </div>
 
+  <!-- ============================== -->
   <!-- お知らせ一覧 -->
+  <!-- ============================== -->
   <div class="announcement-page">
     <div class="announcement-container">
 
@@ -284,14 +371,16 @@
     </div>
   </div>
 
+  <!-- ============================== -->
   <!-- フッター -->
+  <!-- ============================== -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-sns">
       <a href="https://www.instagram.com/oikawa_zemiii?igsh=MTk3d201NWJvczlxaA==" target="_blank" rel="noopener">
-        <img src="インスタ.png" alt="Instagram" class="insta-icon" />
+        <img src="インスタ　アイコン.png" alt="Instagram" class="insta-icon" />
       </a>
       <a href="https://line.me/ti/g2/SfbULoGEmAWoT1aAh0XnD6KRkZOXD4zk79qlug?utm_source=invitation&utm_medium=QR_code&utm_campaign=default" target="_blank" rel="noopener">
-        <img src="オープンチャット.png" alt="LINEオープンチャット" class="line-icon" />
+        <img src="オープンチャット　アイコン.png" alt="LINEオープンチャット" class="line-icon" />
       </a>
     </div>
 
@@ -311,3 +400,4 @@
 
 </body>
 </html>
+
