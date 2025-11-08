@@ -98,7 +98,16 @@
 
     /* ===== 教員紹介の横並び ===== */
     .teacher-about-flex{ display:flex; justify-content:center; align-items:center; gap:2rem; flex-wrap:nowrap; }
-    .teacher-image{ max-width:min(30rem,92vw); height:auto; display:block; border-radius:.5rem; box-shadow:var(--shadow); background:#fff; }
+   .teacher-image {
+  max-width:min(30rem,92vw);
+  height:auto;
+  display:block;
+  border-radius:.5rem;
+  box-shadow:var(--shadow);
+  background:transparent;  /* ← 白背景を透過に変更 */
+  border:none;             /* ← 念のため枠線も無効化 */
+}
+
     @media (max-width:1024px){
       .teacher-about-flex{ flex-direction:column; align-items:center; }
     }
