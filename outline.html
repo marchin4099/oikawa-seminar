@@ -46,7 +46,7 @@
       .header-nav a{ font-size:14px; }
     }
 
-    /* ===== ヒーロー（トップ画像＋オーバーレイ） ===== */
+    /* ===== ヒーロー ===== */
     .teacher-top{ position: relative; width: 100%; height: 360px; overflow: hidden; }
     .top-image{ width:100%; height:100%; object-fit:cover; display:block; }
     .teacheroverlay-box{
@@ -98,16 +98,17 @@
 
     /* ===== 教員紹介の横並び ===== */
     .teacher-about-flex{ display:flex; justify-content:center; align-items:center; gap:2rem; flex-wrap:nowrap; }
-   .teacher-image {
-  max-width:min(30rem,92vw);
-  height:auto;
-  display:block;
-  border-radius:.5rem;
-  box-shadow:var(--shadow);
-  background:transparent;  /* ← 白背景を透過に変更 */
-  border:none;             /* ← 念のため枠線も無効化 */
-}
-
+    .teacher-image-wrapper{ display:block; }
+    .teacher-image{
+      max-width:min(30rem,92vw);
+      height:auto;
+      display:block;
+      border-radius:.5rem;
+      background:transparent;   /* 背景透過 */
+      border:none;              /* 枠線なし */
+      box-shadow:none;          /* 影なし → “枠”に見える原因を除去 */
+      mix-blend-mode:multiply;  /* 画像に白縁があっても馴染ませる（不要なら削除OK） */
+    }
     @media (max-width:1024px){
       .teacher-about-flex{ flex-direction:column; align-items:center; }
     }
@@ -129,11 +130,11 @@
       .activity__media{ height:var(--media-h-mobile); margin-bottom:1rem; }
     }
 
-    /* ===== 授業頻度（ここが今回の完全差し替え） ===== */
+    /* ===== 授業頻度 ===== */
     .about-list { margin: 0; padding: 0 1rem; max-width: 1000px; margin-left:auto; margin-right:auto; }
     .about-item{
       display: grid;
-      grid-template-columns: 6em 1fr;  /* 左：学年 / 右：本文 */
+      grid-template-columns: 6em 1fr;
       gap: 1rem;
       align-items: start;
       padding: .9rem 0;
@@ -146,25 +147,24 @@
       font-weight: 700;
       color: #444;
       position: relative;
-      padding-left: .75rem;            /* バーと文字の間 */
+      padding-left: .75rem;
     }
     .about-item dt::before{
       content: "";
       position: absolute;
       left: 0; top: .15rem; bottom: .15rem;
       width: 4px;
-      background: #d8d4c8;            /* 左の縦バー色 */
+      background: #d8d4c8;
       border-radius: 2px;
     }
 
     .about-item dd{
       margin: 0;
-      color: #2e4057;                  /* 本文色（少し青み） */
+      color: #2e4057;
       line-height: 1.9;
       word-break: break-word;
     }
 
-    /* 備考（※行）用：小さめ＆グレー＆左線 */
     .about-note{
       display: block;
       margin-top: .35rem;
@@ -271,7 +271,7 @@
     </div>
   </section>
 
-  <!-- 授業頻度（差し替え済み） -->
+  <!-- 授業頻度 -->
   <section class="activities" id="frequency">
     <div class="bar-title">
       <h2 class="bar-title__text">授業頻度</h2>
