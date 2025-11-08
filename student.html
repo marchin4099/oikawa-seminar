@@ -5,156 +5,63 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>及川ゼミ｜ゼミ生紹介</title>
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet" />
+
   <style>
-    /* ===== Base ===== */
-    html,body{ margin:0; }
-    body{
-      font-family:"Zen Maru Gothic",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-      color:#222; background:#fafafa; line-height:1.65;
-    }
+    /* ==============================
+       ベース
+    ============================== */
     :root{
       /* 見出し帯 */
-      --bar-color:#CDA209; --bar-text:#fff; --bar-max:1100px; --bar-line:2px;
-      /* カード系 */
+      --bar-color:#CDA209; --bar-max:1100px; --bar-line:2px;
+      /* カード・文字 */
       --card-bg:#fff; --text:#333; --muted:#666;
-      --shadow:0 2px 8px rgba(0,0,0,0.1); --radius:12px;
+      --shadow:0 2px 8px rgba(0,0,0,.1); --radius:12px;
       --wrap:min(1000px,92vw);
     }
 
-     .teacheroverlay-box {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒塗り */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
+    html, body { margin:0; padding:0; }
+    body{
+      font-family:"Zen Maru Gothic", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color:#333; background:#fffaf2; /* ほんのりクリーム */
+    }
 
-.teacheroverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.teacher-top{
-  position: relative;
-  width: 100%;
-  height: 360px; /* 画像と同じ高さに固定 */
-  overflow: hidden;
-}
-
-.letteroverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.studentoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.activityoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.outlineoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-
-}
-
-.questionoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.contactoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
-
-.planoverlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  line-height: 1.6;
-}
+    /* ==============================
+       ヘッダー/ナビ
+    ============================== */
     .site-header{
-  position:sticky; top:0; z-index:1000;
-  height:60px;
-  background:#003366;
-  display:flex;
-  align-items:center;
-  padding:0 3%;
-  box-sizing:border-box;
-  overflow-x:auto;                /* ← 横スクロールを許可 */
-  -webkit-overflow-scrolling:touch; /* ← iPhoneでスムーズに */
-}
+      position:sticky; top:0; z-index:1000; height:60px;
+      background:#003366; display:flex; align-items:center;
+      padding:0 3%; box-sizing:border-box; overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .site-header::-webkit-scrollbar{ display:none; }
+    .header-nav{ display:flex; flex-wrap:nowrap; gap:24px; white-space:nowrap; justify-content:flex-start; }
+    .header-nav a{
+      color:#fff; text-decoration:none; font-size:16px; line-height:1.2; padding:.5rem 0;
+    }
+    .header-nav a:hover{ color:#00a2ff; }
+    @media (max-width:768px){
+      .header-nav{ gap:16px; }
+      .header-nav a{ font-size:14px; }
+    }
 
-/* スクロールバー非表示（任意） */
-.site-header::-webkit-scrollbar {
-  display: none;
-}
+    /* ==============================
+       ヒーロー（上部ビジュアル）
+    ============================== */
+    .teacher-top{ position:relative; width:100%; height:360px; overflow:hidden; }
+    .top-image{ width:100%; height:100%; object-fit:cover; display:block; }
+    .teacheroverlay-box{
+      position:absolute; inset:0; background:rgba(0,0,0,.6);
+      display:flex; align-items:center; justify-content:center; z-index:1;
+    }
+    .studentoverlay-text{
+      color:#fff; text-align:center; font-weight:bold; line-height:1.6;
+      font-family:"Zen Maru Gothic", sans-serif;
+    }
 
-.header-nav{
-  display:flex;
-  flex-wrap:nowrap;              /* ← 折り返さない */
-  gap:24px;                      /* ← 間隔は好みで調整 */
-  white-space:nowrap;            /* ← 改行禁止で横並び固定 */
-  justify-content:flex-start;
-}
-
-.header-nav a{
-  color:#fff;
-  text-decoration:none;
-  font-size:16px;
-  line-height:1.2;
-  padding:0.5rem 0;              /* ← 指で押しやすく */
-}
-
-.header-nav a:hover{
-  color:#00a2ff;
-}
-
-/* ===== スマホ対応（768px以下） ===== */
-@media (max-width: 768px){
-  .header-nav{
-    gap:16px;                   /* スマホは少し詰める */
-  }
-  .header-nav a{
-    font-size:14px;
-  }
-}
-
-
-
-    /* ===== 見出し帯 ===== */
+    /* ==============================
+       見出し帯
+    ============================== */
     .bar-title{
       width:100%; max-width:var(--bar-max); margin:1.5rem auto;
       background:var(--bar-color); position:relative; padding:1rem 1.5rem; box-sizing:border-box;
@@ -164,44 +71,43 @@
       content:""; position:absolute; left:0; width:100%; height:var(--bar-line); background:#fff;
     }
     .bar-title::before{ top:0; } .bar-title::after{ bottom:0; }
-    .bar-title__text{ margin:0; color:#fff; font-weight:700; text-align:center; font-size:clamp(1.4rem,3vw,1.8rem); }
-    @media (max-width:1024px){ .bar-title{ width:auto; margin:1.5rem .5rem; border-radius:.4rem; } }
+    .bar-title__text{
+      margin:0; color:#fff; font-weight:700; text-align:center;
+      font-size:clamp(1.4rem,3vw,1.8rem);
+    }
+    @media (max-width:1024px){
+      .bar-title{ width:auto; margin:1.5rem .5rem; border-radius:.4rem; }
+    }
 
-    /* ===== 本文コンテナ ===== */
+    /* ==============================
+       本文コンテナ
+    ============================== */
     .generations{
-      box-sizing:border-box;
-      max-width:700px; /* ブログと統一 */
-      margin:2rem auto;
-      padding:0 1rem;
-      color:var(--text);
+      box-sizing:border-box; max-width:700px; /* ブログと統一 */
+      margin:2rem auto; padding:0 1rem; color:var(--text);
     }
     .generations-heading{
-      font-size:clamp(1.4rem,2.5vw,1.8rem);
-      font-weight:800; text-align:center; margin-bottom:1.25rem;
+      font-size:clamp(1.4rem,2.5vw,1.8rem); font-weight:800; text-align:center; margin-bottom:1.25rem;
     }
 
-    /* ===== カード ===== */
+    /* ==============================
+       カード
+    ============================== */
     .generation-card{
-      background:var(--card-bg);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:clamp(1rem,2.5vw,1.5rem) clamp(1rem,3vw,2rem);
-      margin:1.25rem 0;
+      background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:clamp(1rem,2.5vw,1.5rem) clamp(1rem,3vw,2rem); margin:1.25rem 0;
     }
     .generation-title{
-      font-size:clamp(1.2rem,2.5vw,1.6rem);
-      font-weight:700; text-align:center; margin-bottom:.5rem;
+      font-size:clamp(1.2rem,2.5vw,1.6rem); font-weight:700; text-align:center; margin-bottom:.5rem;
     }
-    .generation-members{
-      text-align:center; color:var(--muted); font-size:.95rem; margin-bottom:1rem;
-    }
+    .generation-members{ text-align:center; color:var(--muted); font-size:.95rem; margin-bottom:1rem; }
     .generation-content{ line-height:1.75; margin-bottom:1rem; }
 
     /* 写真 */
     .generation-photo{ text-align:center; margin-bottom:1rem; }
     .generation-photo img{
       width:100%; max-width:640px; border-radius:10px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.15); object-fit:cover;
+      box-shadow:0 2px 6px rgba(0,0,0,.15); object-fit:cover;
     }
     .photo-caption{ font-size:.85rem; color:var(--muted); margin-top:.4rem; }
 
@@ -222,7 +128,9 @@
       .generation-comment blockquote{ padding:.75rem .85rem; }
     }
 
-    /* ===== Footer ===== */
+    /* ==============================
+       フッター
+    ============================== */
     .site-footer{ background:#333; color:#fff; text-align:center; padding:1rem; }
     .footer-sns img{ width:3rem; height:auto; margin:1rem; vertical-align:middle; }
     .line-icon{ border-radius:50%; overflow:hidden; }
@@ -234,7 +142,6 @@
 </head>
 
 <body>
-
   <!-- Header -->
   <header class="site-header" role="banner">
     <nav class="header-nav" aria-label="主要ナビゲーション">
@@ -262,7 +169,6 @@
 
   <!-- 学年ごとのカード -->
   <section class="generations">
-
     <!-- 第2期生 -->
     <article class="generation-card">
       <h2 class="generation-title">第2期生（2024年度入ゼミ）</h2>
@@ -308,7 +214,6 @@
         </blockquote>
       </div>
     </article>
-
   </section>
 
   <!-- Footer -->
@@ -335,6 +240,6 @@
 
     <p class="footer-copy">Copyright © Oikawa Seminar Rights Reserved.</p>
   </footer>
-
 </body>
 </html>
+
