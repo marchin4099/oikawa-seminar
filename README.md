@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>活動ブログ｜及川ゼミ</title>
+
+  <!-- フォント -->
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== ベース ===== */
+    html, body { margin: 0; }
+    body { font-family: "Zen Maru Gothic", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+
+    :root {
+      --card-bg: #fff;
+      --text: #333;
+      --muted: #666;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --accent: #0a66c2;
+      --blockquote-bg: #f7f7f7;
+      --radius: 12px;
+    }
+ 
+ :root{
+      /* 見出し帯 */
+      --bar-color:#CDA209; --bar-text:#fff; --bar-max:1100px; --bar-line-thin:2px;
+      /* カード/文字 */
+      --card-bg:#fff; --muted:#666; --shadow:0 2px 8px rgba(0,0,0,.1); --radius:12px;
+      /* 活動カードの画像枠高 */
+      --media-h-desktop:200px; --media-h-mobile:220px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --card-bg:#1f1f1f; --muted:#bbb; --shadow:0 2px 10px rgba(0,0,0,.5); }
+      body{ color:#eee; background:#111; }
+    }
+
+   
+
+    /* ===== 見出し帯 ===== */
+    .bar-title{
+      width:100%; max-width:var(--bar-max);
+      margin:1.5rem auto; background:var(--bar-color);
+      position:relative; padding:1rem 1.5rem; box-sizing:border-box;
+      border-top:1px solid rgba(205,162,9,.8); border-bottom:1px solid rgba(205,162,9,.8);
+    }
+    .bar-title::before,.bar-title::after{
+      content:""; position:absolute; left:0; width:100%; height:var(--bar-line-thin); background:#fff;
+    }
+    .bar-title::before{ top:0; } .bar-title::after{ bottom:0; }
+    .bar-title__text{ color:#fff; font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700; margin:0; text-align:center; }
+    @media (max-width:1024px){ .bar-title{ width:auto; margin:1.5rem .5rem; border-radius:.4rem; } }
+
+
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --card-bg: #1f1f1f;
+        --text: #eee;
+        --muted: #bbb;
+        --shadow: 0 2px 10px rgba(0,0,0,0.5);
+        --blockquote-bg: #2a2a2a;
+        --accent: #4da3ff;
+      }
+    }
+ .teacheroverlay-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒塗り */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.teacheroverlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  line-height: 1.6;
+}
+
+.teacher-top{
+  position: relative;
+  width: 100%;
+  height: 360px; /* 画像と同じ高さに固定 */
+  overflow: hidden;
+}
+
+.letteroverlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  line-height: 1.6;
+}
+
+.studentoverlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  line-height: 1.6;
+}
+
+.activityoverlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  line-height: 1.6;
+}
+
+.outlineoverlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  line-height: 1.6;
+
+}
+
+.questionoverlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  line-height: 1.6;
+}
+
+.contactoverlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  line-height: 1.6;
+}
+
+.planoverlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  line-height: 1.6;
+}
+    .site-header{
+  position:sticky; top:0; z-index:1000;
+  height:60px;
+  background:#003366;
+  display:flex;
+  align-items:center;
+  padding:0 3%;
+  box-sizing:border-box;
+  overflow-x:auto;                /* ← 横スクロールを許可 */
+  -webkit-overflow-scrolling:touch; /* ← iPhoneでスムーズに */
+}
+
+/* スクロールバー非表示（任意） */
+.site-header::-webkit-scrollbar {
+  display: none;
+}
+
+.header-nav{
+  display:flex;
+  flex-wrap:nowrap;              /* ← 折り返さない */
+  gap:24px;                      /* ← 間隔は好みで調整 */
+  white-space:nowrap;            /* ← 改行禁止で横並び固定 */
+  justify-content:flex-start;
+}
+
+.header-nav a{
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+  line-height:1.2;
+  padding:0.5rem 0;              /* ← 指で押しやすく */
+}
+
+.header-nav a:hover{
+  color:#00a2ff;
+}
+
+/* ===== スマホ対応（768px以下） ===== */
+@media (max-width: 768px){
+  .header-nav{
+    gap:16px;                   /* スマホは少し詰める */
+  }
+  .header-nav a{
+    font-size:14px;
+  }
+}
+
+
+ 
+    /* ===== ブログ記事 ===== */
+    .blog-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      color: var(--text);
+    }
+    .blog-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 0 0 .3rem 0;
+      line-height: 1.4;
+    }
+    .blog-date {
+      font-size: .95rem;
+      text-align: center;
+      color: #777;
+      margin: 0 0 1rem 0;
+    }
+    .blog-location {
+      font-size: 1rem;
+      color: #555;
+      text-align: center;
+      margin: 0 0 1.2rem 0;
+      font-weight: 600;
+    }
+    .blog-content {
+      font-size: 1rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+    .blog-photo {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* 複数画像のレイアウト */
+    .blog-photos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .responsive-image {
+      width: calc(50% - .5rem);   /* 2枚並び */
+      border-radius: 10px;
+      object-fit: cover;
+      display: block;
+    }
+    .responsive-image:only-child { width: 100%; }
+
+    @media (max-width: 600px) {
+
+      .blog-title { font-size: 1.35rem; }
+      .blog-content { font-size: .95rem; }
+      .blog-container { padding: 1rem; margin: 1.2rem 0; }
+      .responsive-image { width: 100%; }
+    }
+
+    /* ===== フッター ===== */
+    .site-footer {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    .footer-sns img {
+      width: 3rem; height: auto; margin: 1rem; vertical-align: middle;
+    }
+    .line-icon { border-radius: 50%; overflow: hidden; }
+    .footer-links {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-bottom: .5rem;
+    }
+    .footer-links a { color: #fff; text-decoration: none; white-space: nowrap; }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-copy { font-size: .9rem; color: #ccc; margin: .5rem 0 0; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <!-- ヘッダー -->
+  <header class="site-header" role="banner">
+    <nav class="header-nav" aria-label="主要ナビゲーション">
+      <a href="top.html">トップページ</a>
+      <a href="outline.html">ゼミ概要</a>
+      <a href="question.html">Q&amp;A</a>
+      <a href="schedule.html">年度予定</a>
+      <a href="index.html">活動ブログ</a>
+      <a href="teacher.html">教員紹介</a>
+      <a href="student.html">ゼミ生紹介</a>
+      <a href="news.html" aria-current="page">お知らせ</a>
+    </nav>
+  </header>
+
+  <section class="teacher-top" aria-label="ページ上部ビジュアル">
+    <img src="IMG_2030.jpeg" class="top-image" alt="トップ画像">
+    <div class="teacheroverlay-box">
+      <div class="teacheroverlay-text"><h1>活　動　ブ　ロ　グ</h1></div>
+    </div>
+  </section>
+
+  <!-- ===== 年タイトル ===== -->
+  <div class="bar-title">
+    <h2 class="bar-title__text">2025年</h2>
+  </div>
+
+  <!-- ===== ブログ記事１：写真2枚 ===== -->
+  <article class="blog-container">
+    <h1 class="blog-title">〇〇旅行記：道後温泉でのんびりした一日</h1>
+    <p class="blog-date">📅 2025年11月7日</p>
+
+    <div class="blog-photos">
+      <img src="風岡トップ.jpg" alt="道後温泉の写真1" class="responsive-image">
+      <img src="風岡トップ.jpg" alt="道後温泉の写真2" class="responsive-image">
+    </div>
+
+    <p class="blog-location">📍 愛媛県松山市 道後温泉本館</p>
+    <div class="blog-content">
+松山観光の初日は道後温泉へ。歴史ある建物の雰囲気に包まれながら、
+ゆったりとした時間を過ごしました。商店街では地元のスイーツや
+柑橘ジュースを堪能し、夜はライトアップされた温泉街がとても幻想的でした。
+    </div>
+  </article>
+
+  <!-- ===== ブログ記事２：写真1枚 ===== -->
+  <article class="blog-container">
+    <h1 class="blog-title">〇〇旅行記：道後温泉でのんびりした一日</h1>
+    <p class="blog-date">📅 2025年11月7日</p>
+
+    <img src="images/dogo.jpg" alt="道後温泉の写真" class="blog-photo">
+    <p class="blog-location">📍 愛媛県松山市 道後温泉本館</p>
+    <div class="blog-content">
+松山観光の初日は道後温泉へ。歴史ある建物の雰囲気に包まれながら、
+ゆったりとした時間を過ごしました。商店街では地元のスイーツや
+柑橘ジュースを堪能し、夜はライトアップされた温泉街がとても幻想的でした。
+    </div>
+  </article>
+
+  <!-- ===== フッター ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-sns">
+      <a href="https://www.instagram.com/oikawa_zemiii?igsh=MTk3d201NWJvczlxaA==" target="_blank" rel="noopener">
+        <img src="インスタ　アイコン.png" alt="Instagram" class="insta-icon" />
+      </a>
+      <a href="https://line.me/ti/g2/SfbULoGEmAWoT1aAh0XnD6KRkZOXD4zk79qlug?utm_source=invitation&utm_medium=QR_code&utm_campaign=default" target="_blank" rel="noopener">
+        <img src="オープンチャット　アイコン.png" alt="LINEオープンチャット" class="line-icon" />
+      </a>
+    </div>
+
+    <nav class="footer-links" aria-label="フッターナビゲーション">
+      <a href="top.html">トップページ</a>
+      <a href="outline.html">ゼミ概要</a>
+      <a href="question.html">Q&amp;A</a>
+      <a href="schedule.html">年度予定</a>
+      <a href="index.html" aria-current="page">活動ブログ</a>
+      <a href="teacher.html">教員紹介</a>
+      <a href="student.html">ゼミ生紹介</a>
+      <a href="news.html">お知らせ</a>
+    </nav>
+
+    <p class="footer-copy">Copyright © Oikawa Seminar Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
+# oikawa-seminar
