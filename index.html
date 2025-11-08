@@ -17,8 +17,8 @@
     ============================== */
     :root{
       /* Colors */
-      --brand-deep:#003366; /* ヘッダー/強調 */
-      --accent:#CDA209;     /* 見出し帯・アクセント */
+      --brand-deep:#003366; /* ヘッダー */
+      --accent:#CDA209;     /* 見出し帯・強調 */
       --text:#333;
       --muted:#666;
       --card-bg:#fff;
@@ -32,7 +32,6 @@
       --wrap:max(1000px,70%);
       --card-max:1000px;
       --section-pad:3rem;
-      --unified-max:900px; /* 風岡画像とロゴ枠の統一幅 */
 
       /* 見出し帯 */
       --bar-color:#CDA209;
@@ -70,8 +69,6 @@
       text-rendering:optimizeLegibility;
     }
 
-    img{ max-width:100%; height:auto; }
-
     /* ==============================
        Header / Nav
     ============================== */
@@ -84,7 +81,9 @@
     }
     .site-header::-webkit-scrollbar{ display:none; }
 
-    .header-nav{ display:flex; flex-wrap:nowrap; gap:24px; white-space:nowrap; }
+    .header-nav{
+      display:flex; flex-wrap:nowrap; gap:24px; white-space:nowrap;
+    }
     .header-nav a{
       color:#fff; text-decoration:none; font-size:16px; line-height:1.2; padding:.5rem 0;
     }
@@ -98,18 +97,27 @@
     /* ==============================
        Hero
     ============================== */
-    .top-wrapper{ position:relative; width:100%; height:600px; overflow:hidden; }
-    .top-image{ width:100%; height:100%; object-fit:cover; display:block; }
+    .top-wrapper{
+      position:relative; width:100%; height:600px; overflow:hidden;
+    }
+    .top-image{
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
     .overlay-box{
       position:absolute; inset:0 auto 0 70%;
       width:30%; height:100%; background:rgba(0,0,0,.6);
       display:flex; align-items:center; justify-content:center; text-align:center;
     }
-    .overlay-text{ color:#fff; font-weight:700; line-height:1.6; margin-top:5rem; padding:0 1rem; }
+    .overlay-text{
+      color:#fff; font-weight:700; line-height:1.6;
+      margin-top:5rem; padding:0 1rem;
+    }
     .overlay-text .line3{ font-size:3rem; letter-spacing:.02em; }
     .overlay-text .line1,.overlay-text .line2{ font-size:1.5rem; }
 
-    @media (max-width:900px){ .top-wrapper{ height:480px; } }
+    @media (max-width:900px){
+      .top-wrapper{ height:480px; }
+    }
     @media (max-width:768px){
       .top-wrapper{ height:360px; }
       .overlay-box{ left:0; width:100%; }
@@ -140,9 +148,11 @@
       animation:welcome-fade .8s ease-out both;
     }
     .welcome-inner{ max-width:50em; margin:0 auto; }
-
-    /* ★ h1色変更（金色→濃いネイビー） */
-    .welcome-head h1{ font-size:clamp(1.6rem,4vw,2.1rem); color:var(--brand-deep); margin:0 0 .6rem; }
+    .welcome-head h1{
+      font-size:clamp(1.6rem,4vw,2.1rem);
+      color:var(--accent);
+      margin:0 0 .6rem;
+    }
     .welcome-lead{ margin:0 0 1.2rem; color:#444; font-size: 1.2rem;}
 
     @keyframes welcome-fade{
@@ -162,46 +172,112 @@
       border-bottom:1px solid rgba(205,162,9,.8);
     }
     .bar-title::before,
-    .bar-title::after{ content:""; position:absolute; left:0; width:100%; height:var(--bar-line-thin); background:#fff; }
+    .bar-title::after{
+      content:""; position:absolute; left:0; width:100%;
+      height:var(--bar-line-thin); background:#fff;
+    }
     .bar-title::before{ top:0; }
     .bar-title::after{ bottom:0; }
-    .bar-title__text{ color:#fff; margin:0; text-align:center; font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700; }
-    @media (max-width:1024px){ .bar-title{ width:auto; margin:1.5rem .5rem; border-radius:.4rem; } }
+    .bar-title__text{
+      color:#fff; margin:0; text-align:center;
+      font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700;
+    }
+    @media (max-width:1024px){
+      .bar-title{ width:auto; margin:1.5rem .5rem; border-radius:.4rem; }
+    }
 
     /* ==============================
-       Theme Image Section（統一幅適用）
+       Theme Image Section
     ============================== */
-    .theme{ width:100%; max-width:1100px; margin:2rem auto 0; padding:0 1rem; box-sizing:border-box; }
+    .theme{
+      width:100%; max-width:1100px;
+      margin:2rem auto 0; padding:0 1rem; box-sizing:border-box;
+    }
     .responsive-image{
-      display:block; margin:1rem auto 0;
-      width:min(var(--unified-max), 100%); /* ← 統一幅 */
+      display:block; margin:1rem auto 0; max-width:100%; height:auto;
       border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.1);
     }
 
+
     /* ==============================
-       Logo Explanation（統一幅適用）
-    ============================== */
-    .logo-section{ padding:var(--section-pad) 1rem; }
-    .logo-card{
-      width:min(var(--unified-max), 100%); /* ← 統一幅 */
-      margin:0 auto; /* 中央寄せ */
-      display:flex; align-items:center; justify-content:center; gap:2rem;
-      background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow); padding:1.5rem;
-    }
-    .logo-card img{ width:40%; border-radius:12px; object-fit:cover; }
-    .text-box{ width:60%; }
-    .text-box h2{ font-size:1.4rem; margin:.2rem 0 1rem; color:var(--accent); }
-    .text-box p{ line-height:1.9; font-size:1rem; color:#444; margin:0; }
-    @media (max-width:768px){ .logo-card{ flex-direction:column; text-align:center; } .logo-card img, .text-box{ width:100%; } }
+   ゼミ写真（風岡画像）
+============================== */
+.responsive-image {
+  max-width: 900px;   /* 横幅上限を900pxに統一 */
+  width: 100%;        /* 画面が狭いときは自動で縮む */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.8rem;
+}
+
+/* ==============================
+   ロゴセクション
+============================== */
+.logo-section { 
+  padding: var(--section-pad) 1rem; 
+}
+
+.logo-card {
+  max-width: 900px;   /* 枠の横幅上限を同じく900pxに */
+  width: 100%;        /* スマホ対応 */
+  margin: 0 auto;     /* 中央寄せ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.logo-card img {
+  width: 40%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.text-box { width: 60%; }
+
+.text-box h2 {
+  font-size: 1.4rem;
+  margin: .2rem 0 1rem;
+  color: var(--accent);
+}
+
+.text-box p {
+  line-height: 1.9;
+  font-size: 1rem;
+  color: #444;
+  margin: 0;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .logo-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .logo-card img,
+  .text-box {
+    width: 100%;
+  }
+}
 
     /* ==============================
        Footer
     ============================== */
-    .site-footer{ background:#333; color:#fff; text-align:center; padding:1rem; margin-top:2rem; }
-    .footer-sns img{ width:3rem; height:auto; margin:1rem; vertical-align:middle; }
+    .site-footer{
+      background:#333; color:#fff; text-align:center;
+      padding:1rem; margin-top:2rem;
+    }
+    .footer-sns img{
+      width:3rem; height:auto; margin:1rem; vertical-align:middle;
+    }
     .line-icon{ border-radius:50%; overflow:hidden; }
-    .footer-links{ display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-bottom:.5rem; }
-    .footer-links a{ color:#fff; text-decoration:none; white-space:nowrap; }
+    .footer-links{
+      display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-bottom:.5rem;
+    }
+    .footer-links a{
+      color:#fff; text-decoration:none; white-space:nowrap;
+    }
     .footer-links a:hover{ text-decoration:underline; }
     .footer-copy{ font-size:.9rem; color:#ccc; margin:.5rem 0 0; }
   </style>
@@ -253,14 +329,14 @@
       <h2 class="bar-title__text">メッセージ</h2>
     </div>
 
-    <!-- Theme image（風岡画像・統一幅） -->
+    <!-- Theme image -->
     <section class="theme" aria-label="ゼミ写真">
       <img src="風岡トップ.jpg" class="responsive-image" alt="ゼミ活動の写真" />
     </section>
 
-    <!-- Logo explanation（ロゴ枠・統一幅） -->
+    <!-- Logo explanation -->
     <section class="logo-section" aria-label="ロゴの説明">
-      <div class="logo-card">
+      <div class="card logo-card">
         <img src="logo.png" alt="及川ゼミロゴのイメージ" />
         <div class="text-box">
           <h2>及川ゼミロゴマーク</h2>
