@@ -6,19 +6,19 @@
   <meta name="description" content="早稲田大学教育学部 社会科公共市民学専修・及川ゼミの公式サイト。ゼミ概要、教員紹介、ゼミ生紹介、活動・お知らせなどを掲載。" />
   <title>及川ゼミ</title>
 
-  <!-- フォント（表示をブロックしない） -->
+  <!-- フォント（非ブロッキング読み込み） -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ==============================
-       Base / Tokens
+       Base / Tokens（共通設定）
     ============================== */
-    :root{
+    :root {
       /* Colors */
       --brand-deep:#003366; /* ヘッダー */
-      --accent:#CDA209;     /* 見出し帯・強調 */
+      --accent:#CDA209;     /* 強調・帯 */
       --text:#333;
       --muted:#666;
       --card-bg:#fff;
@@ -39,31 +39,33 @@
       --bar-max:1100px;
       --bar-line-thin:2px;
 
-      /* メディア高さ */
+      /* 画像の高さ */
       --media-h-desktop:200px;
       --media-h-mobile:220px;
     }
 
-    /* ダークモード調整（配色のみ上書き） */
-    @media (prefers-color-scheme: dark){
-      :root{
+    /* ==============================
+       ダークモード（配色のみ上書き）
+    ============================== */
+    @media (prefers-color-scheme: dark) {
+      :root {
         --card-bg:#1e1e1e;
         --muted:#bbb;
         --line:#333;
         --shadow:0 2px 12px rgba(0,0,0,.55);
       }
-      body{ color:#fffaf2; background:#141414; }
-      a{ color:#9bd3ff; }
+      body { color:#fffaf2; background:#141414; }
+      a { color:#9bd3ff; }
     }
 
     /* ==============================
        Base
     ============================== */
-    html,body{ margin:0; padding:0; }
-    body{
+    html, body { margin:0; padding:0; }
+    body {
       font-family:"Zen Maru Gothic",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       color:var(--text);
-      background:#fffaf2; /* ほんのりクリーム（サイト共通トーン） */
+      background:#fffaf2; /* 紙っぽいクリーム色（共通トーン） */
       line-height:1.8;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
@@ -72,98 +74,92 @@
     /* ==============================
        Header / Nav
     ============================== */
-    .site-header{
+    .site-header {
       position:sticky; top:0; z-index:1000;
       height:60px; background:var(--brand-deep);
       display:flex; align-items:center;
-      padding:0 3%; box-sizing:border-box;
+      padding:0 3%;
+      box-sizing:border-box;
       overflow-x:auto; -webkit-overflow-scrolling:touch;
     }
-    .site-header::-webkit-scrollbar{ display:none; }
+    .site-header::-webkit-scrollbar { display:none; }
 
-    .header-nav{
+    .header-nav {
       display:flex; flex-wrap:nowrap; gap:24px; white-space:nowrap;
     }
-    .header-nav a{
-      color:#fff; text-decoration:none; font-size:16px; line-height:1.2; padding:.5rem 0;
+    .header-nav a {
+      color:#fff; text-decoration:none;
+      font-size:16px; line-height:1.2; padding:.5rem 0;
     }
-    .header-nav a:hover{ color:#00a2ff; }
+    .header-nav a:hover { color:#00a2ff; }
 
-    @media (max-width:768px){
-      .header-nav{ gap:16px; }
-      .header-nav a{ font-size:14px; }
+    @media (max-width:768px) {
+      .header-nav { gap:16px; }
+      .header-nav a { font-size:14px; }
     }
 
     /* ==============================
-       Hero
+       Hero（トップビジュアル）
     ============================== */
-    .top-wrapper{
+    .top-wrapper {
       position:relative; width:100%; height:600px; overflow:hidden;
     }
-    .top-image{
+    .top-image {
       width:100%; height:100%; object-fit:cover; display:block;
     }
-    .overlay-box{
+    .overlay-box {
       position:absolute; inset:0 auto 0 70%;
-      width:30%; height:100%; background:rgba(0,0,0,.6);
+      width:30%; height:100%;
+      background:rgba(0,0,0,.6);
       display:flex; align-items:center; justify-content:center; text-align:center;
     }
-    .overlay-text{
+    .overlay-text {
       color:#fff; font-weight:700; line-height:1.6;
       margin-top:5rem; padding:0 1rem;
     }
-    .overlay-text .line3{ font-size:3rem; letter-spacing:.02em; }
-    .overlay-text .line1,.overlay-text .line2{ font-size:1.5rem; }
+    .overlay-text .line3 { font-size:3rem; letter-spacing:.02em; }
+    .overlay-text .line1, .overlay-text .line2 { font-size:1.5rem; }
 
-    @media (max-width:900px){
-      .top-wrapper{ height:480px; }
+    @media (max-width:900px) {
+      .top-wrapper { height:480px; }
     }
-    @media (max-width:768px){
-      .top-wrapper{ height:360px; }
-      .overlay-box{ left:0; width:100%; }
-      .overlay-text{ margin-top:4rem; }
-      .overlay-text .line3{ font-size:2.2rem; }
-      .overlay-text .line1,.overlay-text .line2{ font-size:1.2rem; }
-    }
-
-    /* ==============================
-       Shared Card
-    ============================== */
-    .card{
-      max-width:var(--card-max);
-      margin:0 auto;
-      background:var(--card-bg);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:1.5rem;
+    @media (max-width:768px) {
+      .top-wrapper { height:360px; }
+      .overlay-box { left:0; width:100%; }
+      .overlay-text { margin-top:4rem; }
+      .overlay-text .line3 { font-size:2.2rem; }
+      .overlay-text .line1, .overlay-text .line2 { font-size:1.2rem; }
     }
 
     /* ==============================
-       Welcome
+       Welcome（イントロ部分）
     ============================== */
-    .welcome{
-      background:linear-gradient(180deg,#fff 0%,#fffaf2 100%);
+    .welcome {
       padding:var(--section-pad) 1.5rem;
       text-align:center;
       animation:welcome-fade .8s ease-out both;
     }
-    .welcome-inner{ max-width:50em; margin:0 auto; }
-    .welcome-head h1{
+    .welcome-inner { max-width:50em; margin:0 auto; }
+    .welcome-head h1 {
       font-size:clamp(1.6rem,4vw,2.1rem);
-      color:var(--accent);
+      color:darkblue;
       margin:0 0 .6rem;
     }
-    .welcome-lead{ margin:0 0 1.2rem; color:#444; font-size: 1.2rem;}
+    .welcome-lead {
+      margin:0 0 1.2rem;
+      color:#444;
+      font-size:1.2rem;
+    }
 
-    @keyframes welcome-fade{
-      from{ opacity:0; transform:translateY(6px); }
-      to{ opacity:1; transform:none; }
+    @keyframes welcome-fade {
+      from { opacity:0; transform:translateY(6px); }
+      to { opacity:1; transform:none; }
     }
 
     /* ==============================
        見出し帯
     ============================== */
-    .bar-title{
+    .bar-title {
       width:100%; max-width:var(--bar-max);
       margin:1.5rem auto; padding:1rem 1.5rem;
       background:var(--bar-color); color:var(--bar-text);
@@ -172,119 +168,94 @@
       border-bottom:1px solid rgba(205,162,9,.8);
     }
     .bar-title::before,
-    .bar-title::after{
+    .bar-title::after {
       content:""; position:absolute; left:0; width:100%;
       height:var(--bar-line-thin); background:#fff;
     }
-    .bar-title::before{ top:0; }
-    .bar-title::after{ bottom:0; }
-    .bar-title__text{
+    .bar-title::before { top:0; }
+    .bar-title::after { bottom:0; }
+    .bar-title__text {
       color:#fff; margin:0; text-align:center;
       font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700;
     }
-    @media (max-width:1024px){
-      .bar-title{ width:auto; margin:1.5rem .5rem; border-radius:.4rem; }
+    @media (max-width:1024px) {
+      .bar-title { width:auto; margin:1.5rem .5rem; border-radius:.4rem; }
     }
 
     /* ==============================
-       Theme Image Section
+       Theme Image（メッセージ写真）
     ============================== */
-    .theme{
-      width:100%; max-width:1100px;
-      margin:2rem auto 0; padding:0 1rem; box-sizing:border-box;
-    }
-    .responsive-image{
-      display:block; margin:1rem auto 0; max-width:100%; height:auto;
+    .theme { margin:0 auto 0; }
+
+    .responsive-image {
+      width:900px; height:auto;
+      display:block; margin:0 auto;
       border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.1);
     }
-
+    @media (max-width:768px) {
+      .responsive-image { width:80vw; }
+    }
 
     /* ==============================
-   ゼミ写真（風岡画像）
-============================== */
-.responsive-image {
-  max-width: 900px;   /* 横幅上限を900pxに統一 */
-  width: 100%;        /* 画面が狭いときは自動で縮む */
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 0.8rem;
-}
+       Logo Section（ロゴ説明）
+    ============================== */
+    .card { margin:0 auto 0; }
+    .logo-section { padding:var(--section-pad) 1rem; }
 
-/* ==============================
-   ロゴセクション
-============================== */
-.logo-section { 
-  padding: var(--section-pad) 1rem; 
-}
+    .logo-card {
+      width:900px; margin:0 auto;
+      display:flex; align-items:center; justify-content:center;
+      gap:2rem;
+    }
+    .logo-card img {
+      width:40%; border-radius:12px; object-fit:cover;
+    }
+    .text-box { width:60%; }
+    .text-box h2 {
+      font-size:1.4rem; margin:.2rem 0 1rem; color:darkblue;
+    }
+    .text-box p {
+      line-height:1.9; font-size:1rem; color:#444; margin:0;
+    }
 
-.logo-card {
-  max-width: 900px;   /* 枠の横幅上限を同じく900pxに */
-  width: 100%;        /* スマホ対応 */
-  margin: 0 auto;     /* 中央寄せ */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.logo-card img {
-  width: 40%;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-.text-box { width: 60%; }
-
-.text-box h2 {
-  font-size: 1.4rem;
-  margin: .2rem 0 1rem;
-  color: var(--accent);
-}
-
-.text-box p {
-  line-height: 1.9;
-  font-size: 1rem;
-  color: #444;
-  margin: 0;
-}
-
-/* スマホ対応 */
-@media (max-width: 768px) {
-  .logo-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  .logo-card img,
-  .text-box {
-    width: 100%;
-  }
-}
+    @media (max-width:768px) {
+      .logo-card {
+        width:80vw; flex-direction:column; text-align:center;
+      }
+      .logo-card img, .text-box { width:100%; }
+    }
 
     /* ==============================
        Footer
     ============================== */
-    .site-footer{
+    .site-footer {
       background:#333; color:#fff; text-align:center;
       padding:1rem; margin-top:2rem;
     }
-    .footer-sns img{
+    .footer-sns img {
       width:3rem; height:auto; margin:1rem; vertical-align:middle;
     }
-    .line-icon{ border-radius:50%; overflow:hidden; }
-    .footer-links{
-      display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-bottom:.5rem;
+    .line-icon { border-radius:50%; overflow:hidden; }
+
+    .footer-links {
+      display:flex; flex-wrap:wrap; justify-content:center;
+      gap:.8rem; margin-bottom:.5rem;
     }
-    .footer-links a{
+    .footer-links a {
       color:#fff; text-decoration:none; white-space:nowrap;
     }
-    .footer-links a:hover{ text-decoration:underline; }
-    .footer-copy{ font-size:.9rem; color:#ccc; margin:.5rem 0 0; }
+    .footer-links a:hover { text-decoration:underline; }
+
+    .footer-copy {
+      font-size:.9rem; color:#ccc; margin:.5rem 0 0;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- ==============================
+       Header
+  ============================== -->
   <header class="site-header" role="banner">
     <nav class="header-nav" aria-label="主要ナビゲーション">
       <a href="index.html" aria-current="page">トップページ</a>
@@ -297,9 +268,11 @@
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- ==============================
+       Hero
+  ============================== -->
   <section class="top-wrapper" aria-label="トップビジュアル">
-    <img src="IMG_2030.jpeg" class="top-image" alt="及川ゼミのトップ画像（キャンパス風景など）" />
+    <img src="homepagetop.jpg" class="top-image" alt="及川ゼミのトップ画像（キャンパス風景など）" />
     <div class="overlay-box">
       <div class="overlay-text" aria-label="学部・専修・ゼミ名">
         <p class="line1">早稲田大学教育学部</p>
@@ -310,6 +283,9 @@
     </div>
   </section>
 
+  <!-- ==============================
+       Main Content
+  ============================== -->
   <main id="main">
     <!-- Welcome -->
     <section class="welcome" aria-label="ウェルカムセクション">
@@ -325,16 +301,17 @@
       </div>
     </section>
 
+    <!-- Bar Title -->
     <div class="bar-title">
       <h2 class="bar-title__text">メッセージ</h2>
     </div>
 
-    <!-- Theme image -->
+    <!-- Theme Image -->
     <section class="theme" aria-label="ゼミ写真">
       <img src="風岡トップ.jpg" class="responsive-image" alt="ゼミ活動の写真" />
     </section>
 
-    <!-- Logo explanation -->
+    <!-- Logo Section -->
     <section class="logo-section" aria-label="ロゴの説明">
       <div class="card logo-card">
         <img src="logo.png" alt="及川ゼミロゴのイメージ" />
@@ -346,7 +323,9 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- ==============================
+       Footer
+  ============================== -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-sns">
       <a href="https://www.instagram.com/oikawa_zemiii?igsh=MTk3d201NWJvczlxaA==" target="_blank" rel="noopener">
@@ -371,5 +350,6 @@
   </footer>
 </body>
 </html>
+
 
 
