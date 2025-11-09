@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://marchin4099.github.io/oikawa-seminar/sitemap.xml
