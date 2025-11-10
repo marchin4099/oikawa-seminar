@@ -90,30 +90,97 @@
 
 
     /* ===== 付箋（青・緑・橙） ===== */
-    .sticky-noteblue, .sticky-notegreen, .sticky-noteorange{
-      position:relative; width:min(30rem,92vw); min-height:30rem; margin:3.5rem auto 2rem; padding:1rem;
-      background:#b3e5f2; box-shadow:0 .25rem .5rem rgba(0,0,0,.2); border-radius:.2rem;
-    }
-    .sticky-notegreen{ background:#d5ef74; }
-    .sticky-noteorange{ background:#ffd878; }
-    .tapeblue, .tapegreen, .tapeorange{
-      position:absolute; top:-2rem; left:50%; transform:translateX(-50%);
-      width:12rem; height:4rem; background:#66bad1;
-    }
-    .tapegreen{ background:#a9d64f; }
-    .tapeorange{ background:#f6a00a; }
-    .note-content{ padding:2.5rem 1rem 1rem; }
-    .note-content h1{ font-size:2.2rem; text-align:center; margin:.2rem 0; }
-    .note-content h2{ font-size:1.6rem; margin:1rem 0 .2rem; }
-    .note-content p{ font-size:1.15rem; margin:.2rem 0; }
-    @media (max-width:600px){
-      .sticky-noteblue,.sticky-notegreen,.sticky-noteorange{ width:85vw; height:85vw; padding:1.5rem 1rem; }
-      .tapeblue,.tapegreen,.tapeorange{ width:8rem; height:2.5rem; top:-1.25rem; }
-      .note-content{ padding-top:2rem; }
-      .note-content h1{ font-size:1.8rem; }
-      .note-content h2{ font-size:1.4rem; }
-      .note-content p{ font-size:1.05rem; }
-    }
+ /* ==============================
+   付箋デザイン（青・緑・橙）
+============================== */
+.sticky-noteblue, .sticky-notegreen, .sticky-noteorange {
+  position: relative;
+  width: min(30rem, 92vw);
+  aspect-ratio: 1 / 1; /* 常に正方形にする */
+  margin: 3.5rem auto 2rem;
+  padding: 1rem;
+  background: #b3e5f2;
+  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.2);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.sticky-notegreen { background: #d5ef74; }
+.sticky-noteorange { background: #ffd878; }
+
+/* テープ部分 */
+.tapeblue, .tapegreen, .tapeorange {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12rem;
+  height: 4rem;
+  background: #66bad1;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.2rem 0.4rem rgba(0,0,0,0.15);
+}
+
+.tapegreen { background: #a9d64f; }
+.tapeorange { background: #f6a00a; }
+
+/* 中身 */
+.note-content {
+  position: relative;
+  padding: 2.5rem 1rem 1rem;
+  height: 100%;
+  overflow: auto; /* 内容が多いときにスクロール */
+  box-sizing: border-box;
+}
+
+.note-content h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  margin: 0.2rem 0;
+}
+
+.note-content h2 {
+  font-size: 1.6rem;
+  margin: 1rem 0 0.3rem;
+}
+
+.note-content p {
+  font-size: 1.15rem;
+  margin: 0.2rem 0;
+  line-height: 1.7;
+}
+
+/* スマホ用 */
+@media (max-width: 600px) {
+  .sticky-noteblue, .sticky-notegreen, .sticky-noteorange {
+    width: 85vw;
+    aspect-ratio: 1 / 1;
+    padding: 1.2rem;
+  }
+
+  .tapeblue, .tapegreen, .tapeorange {
+    width: 8rem;
+    height: 2.5rem;
+    top: -1.2rem;
+  }
+
+  .note-content {
+    padding-top: 2rem;
+  }
+
+  .note-content h1 {
+    font-size: 1.7rem;
+  }
+
+  .note-content h2 {
+    font-size: 1.35rem;
+  }
+
+  .note-content p {
+    font-size: 1.05rem;
+  }
+}
+
 
     /* ===== 教員紹介の横並び ===== */
     .teacher-about-flex{ display:flex; justify-content:center; align-items:center; gap:2rem; flex-wrap:nowrap; }
